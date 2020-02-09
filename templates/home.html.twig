@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gesti'O{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+    
+        <div id="image-accueil">
+            <div class="row-1">
+                <h1 class="col mt-5 text-primary">Bienvenue sur Gesti'O</h1>
+            </div>
+        
+        </div>
+        
+    </div>
+    <div class="container-2">
+        <h1 class="text-center mt-5">Etes-vous?</h1>
+        <div class="container text-center mt-5">
+            <a class="btn btn-primary mx-5" href="{{ path('account_login_admin') }}">Restaurateur</a>
+            <a class="btn btn-primary mx-5" href="{{ path('account_login_client') }}">Client</a>
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include "partials/footer.html.twig" %}
+{% endblock %}

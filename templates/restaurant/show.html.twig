@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurant{% endblock %}
+
+{% block header %}
+    {% include 'partials/header_client.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+        <h1 class="text-center mt-5 border font-weight-bold">Fiche restaurant</h1>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col-4 ml-auto mr-auto p-3">
+                    <img src="{{ rest.coverImage }}" alt="Image restaurants">
+                </div>
+                <div class="col">
+                    <span class="badge badge-primary">{{ rest.nom }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mb-3">
+            <h2 style="color: black" class="mt-5 text-center">{{ rest.nom }}</h2><br>
+            <h3>Description:</h3>
+            <p>{{ rest.description }}</p> <br><br>
+            <h3>Coordonnées:</h3><br>
+            <strong>Adresse: </strong>{{ rest.adresse }} <br><br>
+            <strong>Ville: </strong>{{ rest.ville }} <br><br>
+            <strong>Code postal: </strong>{{ rest.codePostal }} <br><br>
+            <strong><i class="fas fa-phone-alt"></i> Téléphone: </strong>{{ rest.telephone }}<br><br>
+            <strong><i class="far fa-envelope"></i> Email: </strong>{{ rest.email }}<br><br>
+            <button type="submit" class="mb-4 btn btn-primary">Commander</button>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for image in rest.images%}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% for image in rest.images %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                            <img src="{{ image.url }}" class="d-block w-100" alt="...">
+                        </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

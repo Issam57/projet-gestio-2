@@ -1,0 +1,24 @@
+{% extends 'base_co.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+    {% block form %}
+        <div id="form-insc" class="col-6 ">
+            <div class="col-6 mx-auto shadow p-3 border">
+                <h1>INSCRIPTION</h1>
+                <p class="text-center mt-4 mb-4">Bienvenue ! Vous êtes déjà inscrit? <a href="{{ path('account_login_client') }}">Connectez-vous ici.</a></p>
+
+                {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <div class="form-group text-center mt-2">
+                    <button type="submit" class="btn btn-primary">Inscription</button>
+                </div>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+    {% endblock %}
+
+{% endblock %}
