@@ -16,7 +16,7 @@ class AccountType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance', BirthdayType::class)
+            ->add('dateNaissance', BirthdayType::class, ["widget" => "single_text"])
             ->add('adresse')
             ->add('ville')
             ->add('codePostal')

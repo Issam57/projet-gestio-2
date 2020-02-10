@@ -2,17 +2,30 @@
 
 {% block title %}Modification du profil{% endblock %}
 
+{% block header %}
+    {% include 'partials/header_client.html.twig' %}
+{% endblock %}
+
 {% block body %}
 
     <div class="container">
-        <h1>Modification du profil</h1>
+            {% for label, messages in app.flashes %}
+                <div class="container text-center">
+                    <div class="alert alert-{{ label }}">
+                        {% for message in messages %}
+                            <p><strong>{{ message }}</strong></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <h1 class="mt-5 mb-5 border p-3">Modification du profil</h1>
 
-        {{ form_start(form) }}
-        {{ form_widget(form) }}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-primary">Modifier</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
 
-        {{ form_end(form) }}
+            {{ form_end(form) }}
 
     </div>
 
