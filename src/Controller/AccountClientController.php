@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Entity\PasswordUpdate;
 use App\Form\AccountType;
+use App\Form\PasswordUpdateType;
 use App\Form\RegistrationClientType;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -79,7 +81,7 @@ class AccountClientController extends AbstractController
     /**
      * Permet d'afficher et de traiter le formulaire de modification de profil
      *
-     * @Route("/account/profile", name="account_client_profile")
+     * @Route("/account/client/profile", name="account_client_profile")
      *
      * @return Response
      */
@@ -102,5 +104,49 @@ class AccountClientController extends AbstractController
         return $this->render('account_client/profile.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * Permet de modifier le mot de passe
+     *
+     * @Route("/account/client/password-update", name="account_client_password")
+     *
+     * @return Response
+     */
+    public function updatePassword(Request $request, UserPasswordEncoderInterface $encoder, EntityManagerInterface $manager) {
+        $passwordUpdate = new PasswordUpdate();
+
+        $client = $this->getUser();
+
+        $form = $this->createForm(PasswordUpdateType::class, $passwordUpdate);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Vérifier que le oldPassword du formulaire est le même que le mot de passe Client
+            if(!password_verify($passwordUpdate->getOldPassword(), $client->getHash())) {
+                //Gérer l'erreur
+                $form->get('oldPassword')->addError(new FormError("Le mot de passe tapé n'est pas votre mot de passe actuel"));
+            } else {
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $encoder->encodePassword($client, $newPassword);
+
+                $client->setHash($hash);
+
+                $manager->persist($client);
+                $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    "Votre mot de passe a bien été modifié"
+                );
+
+                return $this->redirectToRoute('accueil_client');
+            }
+        }
+
+    return $this->render('account_client/password.html.twig', [
+        'form' => $form->createView()
+    ]);
     }
 }
