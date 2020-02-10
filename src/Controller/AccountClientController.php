@@ -123,10 +123,15 @@ class AccountClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $oldPassword = $passwordUpdate->getOldPassword();
+            $newPassword = $passwordUpdate->getNewPassword();
             //Vérifier que le oldPassword du formulaire est le même que le mot de passe Client
             if(!password_verify($passwordUpdate->getOldPassword(), $client->getHash())) {
                 //Gérer l'erreur
                 $form->get('oldPassword')->addError(new FormError("Le mot de passe tapé n'est pas votre mot de passe actuel"));
+                } elseif ($oldPassword === $newPassword) {
+                    $form->get('oldPassword')->addError(new FormError("Vous avez saisi le même mot de passe que l'ancien, veuillez en choisir un nouveau"));
+
             } else {
                 $newPassword = $passwordUpdate->getNewPassword();
                 $hash = $encoder->encodePassword($client, $newPassword);

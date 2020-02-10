@@ -30,8 +30,8 @@
         </div>
     </nav>
     {% for label, messages in app.flashes %}
-        <div class="container text-center">
-            <div class="alert alert-{{ label }}">
+        <div class="container text-center mt-3">
+            <div class="alert alert-{{ label }} border">
                 {% for message in messages %}
                     <p><strong>{{ message }}</strong></p>
                 {% endfor %}
