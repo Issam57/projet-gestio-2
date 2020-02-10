@@ -35,7 +35,8 @@
             <strong>Code postal: </strong>{{ rest.codePostal }} <br><br>
             <strong><i class="fas fa-phone-alt"></i> Téléphone: </strong>{{ rest.telephone }}<br><br>
             <strong><i class="far fa-envelope"></i> Email: </strong>{{ rest.email }}<br><br>
-            <button type="submit" class="mb-4 btn btn-primary">Commander</button>
+            <button type="submit" class="mb-4 mt-3 btn btn-primary">Commander</button>
+            <a href="{{ path('restos_index') }}" class="mb-4 mt-3 ml-4 btn btn-danger ">Retour</a>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     {% for image in rest.images%}
