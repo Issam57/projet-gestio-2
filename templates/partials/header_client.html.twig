@@ -15,8 +15,18 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if app.user %}
-                    <li class="nav-item">
-                        <a href="{{ path('account_logout_client') }}" class="nav-link">Déconnexion</a>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="accountDropdownLink">
+                            <img src="/image/avatar.jpg" class="avatar avatar-mini" alt="avatar">{{ app.user.fullName }}
+                        </a>
+                        <div class="dropdown-menu dropdwon-menu-right" aria-labelledby="accountDropdownLink">
+                            <a href="{{ path('account_index') }}" class="dropdown-item">Mon compte</a>
+                            <a href="{{ path('account_client_profile') }}" class="dropdown-item">Modifier mon profil</a>
+                            <a href="{{ path('account_client_password') }}" class="dropdown-item">Modifier mot de passe</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ path('account_logout_client') }}" class="dropdown-item">Déconnnexion</a>
+                        </div>
+
                     </li>
                 {% else %}
                     <li class="nav-item border">

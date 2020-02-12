@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de {{ client.fullName }}{% endblock %}
+
+{% block header %}
+    {% include 'partials/header_client.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1 class="text-center mt-5 border p-3"><i class="fas fa-portrait"></i> Fiche Client</h1>
+        <div class="row mt-5 align-items-center">
+            <div class="col-1 text-center">
+                <img style="width: 120px; height: 120px" class="avatar" src="/image/avatar.jpg" alt="avatar"><br>
+            </div>
+            <div class="col-11 text-center">
+                <h2>{{ client.fullName }}</h2>
+                {% if client is same as(app.user) %}
+                    <div class="mt-3">
+                        <a href="{{ path('account_client_profile') }}" class="btn btn-primary mr-2 mb-2">Modifier mes informations</a>
+                        <a href="{{ path('account_client_password') }}" class="btn btn-primary mb-2">Modifier le mot de passe</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="container">
+            <h2 class="mt-3" style="text-decoration: underline"><strong>Informations :</strong></h2><br><br>
+            <strong>Date de naissance :</strong> {{ client.dateNaissance | date("d/m/Y") }}<br><br>
+            <strong>Adresse :</strong> {{ client.adresse }}<br><br>
+            <strong>Ville :</strong> {{ client.ville }}<br><br>
+            <strong>Code postal :</strong> {{ client.codePostal }}<br><br>
+            <strong><i class="fas fa-phone-alt"></i> Téléphone :</strong> {{ client.telephone }}<br><br>
+            <strong><i class="fas fa-envelope"></i> Email :</strong> {{ client.email }}
+        </div>
+    </div>
+
+{% endblock %}

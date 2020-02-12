@@ -6,6 +6,12 @@ h1
     font-weight: bold;
 }
 
+h2
+{
+    color: black;
+    font-weight: bold;
+}
+
 img.navbar
 {
     width: 150px;
@@ -84,4 +90,11 @@ img.navbar
 {
     text-align: center;
     font-size: 20px;
+}
+
+.avatar-mini
+{
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
 }

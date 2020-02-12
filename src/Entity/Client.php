@@ -92,6 +92,10 @@ class Client implements UserInterface
         $this->commandes = new ArrayCollection();
     }
 
+    public function getFullName() {
+        return "{$this->nom} {$this->prenom}";
+    }
+
     /**
      * Permet d'initialiser le slug
      *
