@@ -82,10 +82,6 @@ class Client implements UserInterface
      */
     private $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="user")
-     */
-    private $commandes;
 
     public function __construct()
     {
@@ -255,34 +251,4 @@ class Client implements UserInterface
 
     public function eraseCredentials() {}
 
-    /**
-     * @return Collection|Commande[]
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande(Commande $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commande $commande): self
-    {
-        if ($this->commandes->contains($commande)) {
-            $this->commandes->removeElement($commande);
-            // set the owning side to null (unless already changed)
-            if ($commande->getUser() === $this) {
-                $commande->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 }
