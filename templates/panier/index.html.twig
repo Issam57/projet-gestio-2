@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block header %}
+    {% include 'partials/header_client.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1 class="mt-5 border p-3">Votre panier</h1>
+        {% if items | length > 0 %}
+            <table class="table mt-5">
+                <thead class="bg-primary">
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.plat.nom }}</td>
+                        <td>{{ item.plat.prix }} €</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.plat.prix * item.quantity}} €</td>
+                        <td>
+                            <a href="{{path('panier_remove', {'id': item.plat.id})}}" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total de la commande : </td>
+                    <td>{{ total }} €</td>
+                    <td></td>
+                </tr>
+                </tfoot>
+            </table>
+        {% else %}
+            <div class="alert alert-danger text-center mt-5">
+                <h4 style="color: red">Le panier est vide</h4>
+            </div>
+        {% endif %}
+    </div>
+    <a style="margin-left: 1450px" href="{{ path('commande') }}" class="btn btn-danger">Retour</a>
+{% endblock %}
