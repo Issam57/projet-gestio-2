@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Image;
+use App\Entity\Plat;
 use App\Entity\Restaurant;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -44,6 +45,18 @@ class AppFixtures extends Fixture
             $clients[] = $client;
         }
 
+        //Pour ajouter des plats
+
+        for($i = 1; $i <= 5; $i++) {
+            $plat = new Plat();
+
+            $plat->setNom('Pizza')
+                ->setDescription($faker->sentence(5))
+                ->setPrix(mt_rand(5, 10))
+                ->setPicture('https://lorempixel.com/400/200/food');
+
+            $manager->persist($plat);
+        }
         //Pour gérer les restaurants
         for ($j = 1; $j <= 10; $j++) {
 

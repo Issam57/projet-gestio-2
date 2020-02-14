@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {% include 'partials/header_client.html.twig' %}
+{% endblock %}
+
+{% block title %}Page de commande{% endblock %}
+
+{% block body %}
+
+    <h1 class="mt-5 border p-3">Choix des plats</h1>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th></th>
+            <th>Prix</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for plat in plats %}
+            <tr>
+                <td>{{ plat.nom }}</td>
+                <td>{{ plat.description }}</td>
+                <td><img style="width: 50px; height: 50px" src="/image/pizza.jpg" alt="pizza"></td>
+                <td>{{ plat.prix }} €</td>
+                <td>
+                    <a href="#" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Ajouter
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
