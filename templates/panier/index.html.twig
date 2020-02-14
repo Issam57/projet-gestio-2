@@ -11,7 +11,7 @@
     <div class="container mt-5">
         <h1 class="mt-5 border p-3">Votre panier</h1>
         {% if items | length > 0 %}
-            <table class="table mt-5">
+            <table class="table mt-5 border">
                 <thead class="bg-primary">
                 <tr>
                     <th>Produit</th>
@@ -38,7 +38,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="3" class="text-right">Total de la commande : </td>
+                    <td colspan="3" class="text-right"><strong>Total de la commande : </strong></td>
                     <td>{{ total }} €</td>
                     <td></td>
                 </tr>
@@ -50,5 +50,8 @@
             </div>
         {% endif %}
     </div>
-    <a style="margin-left: 1450px" href="{{ path('commande') }}" class="btn btn-danger">Retour</a>
+    <div class="container text-right">
+        <a href="{{ path('commande') }}" class="btn btn-danger">Retour</a>
+        <a href="#" class="btn btn-success ml-5">Paiement</a>
+    </div>
 {% endblock %}
