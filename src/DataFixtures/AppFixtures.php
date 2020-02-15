@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\Image;
 use App\Entity\Plat;
 use App\Entity\Restaurant;
+use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
@@ -22,6 +23,23 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr-FR');
+
+        $adminRole = new Role();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        $adminUser = new Restaurant();
+        $adminUser->setNom('Fast Pizza')
+                    ->setAdresse('2 rue de la paix')
+                    ->setVille('Metz')
+                    ->setCodePostal('57070')
+                    ->setTelephone('0605040302')
+                    ->setDescription('La meilleure pizza de la région, tout est fait maison')
+                    ->setEmail('pizza@gmail.com')
+                    ->setHash($this->encoder->encodePassword($adminUser, 'password'))
+                    ->setCoverImage('https://lorempixel.com/900/350/food')
+                    ->addRestaurantRole($adminRole);
+        $manager->persist($adminUser);
 
        /// Pour gérer les clients
         $clients = [];

@@ -6,12 +6,14 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use function foo\func;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RestaurantRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Restaurant
+class Restaurant implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -75,9 +77,15 @@ class Restaurant
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="restaurateurs")
+     */
+    private $restaurantRoles;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->restaurantRoles = new ArrayCollection();
     }
 
 
@@ -221,6 +229,31 @@ class Restaurant
         return $this;
     }
 
+    public function getRoles()
+    {
+        $roles = $this->restaurantRoles->map(function ($role){
+            return $role->getTitle();
+        })->toArray();
+
+        $roles[] = 'ROLE_USER';
+
+        return $roles;
+    }
+
+    public function getPassword()
+    {
+        return $this->hash;
+    }
+
+    public function getSalt() {}
+
+    public function getUsername()
+    {
+        return $this->email;
+    }
+
+    public function eraseCredentials() {}
+
     /**
      * @return Collection|Image[]
      */
@@ -247,6 +280,34 @@ class Restaurant
             if ($image->getResto() === $this) {
                 $image->setResto(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getRestaurantRoles(): Collection
+    {
+        return $this->restaurantRoles;
+    }
+
+    public function addRestaurantRole(Role $restaurantRole): self
+    {
+        if (!$this->restaurantRoles->contains($restaurantRole)) {
+            $this->restaurantRoles[] = $restaurantRole;
+            $restaurantRole->addRestaurateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRestaurantRole(Role $restaurantRole): self
+    {
+        if ($this->restaurantRoles->contains($restaurantRole)) {
+            $this->restaurantRoles->removeElement($restaurantRole);
+            $restaurantRole->removeRestaurateur($this);
         }
 
         return $this;

@@ -82,10 +82,16 @@ class Client implements UserInterface
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="users")
+     */
+    private $clientRoles;
+
 
     public function __construct()
     {
         $this->commandes = new ArrayCollection();
+        $this->clientRoles = new ArrayCollection();
     }
 
     public function getFullName() {
@@ -250,5 +256,33 @@ class Client implements UserInterface
     }
 
     public function eraseCredentials() {}
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getClientRoles(): Collection
+    {
+        return $this->clientRoles;
+    }
+
+    public function addClientRole(Role $clientRole): self
+    {
+        if (!$this->clientRoles->contains($clientRole)) {
+            $this->clientRoles[] = $clientRole;
+            $clientRole->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientRole(Role $clientRole): self
+    {
+        if ($this->clientRoles->contains($clientRole)) {
+            $this->clientRoles->removeElement($clientRole);
+            $clientRole->removeUser($this);
+        }
+
+        return $this;
+    }
 
 }

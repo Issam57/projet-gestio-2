@@ -167,5 +167,4 @@ class AccountClientController extends AbstractController
             'client' => $this->getUser()
         ]);
     }
-
 }
