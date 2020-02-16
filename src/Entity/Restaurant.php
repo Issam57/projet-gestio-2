@@ -82,10 +82,16 @@ class Restaurant implements UserInterface
      */
     private $restaurantRoles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\News", mappedBy="restaurant")
+     */
+    private $news;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->restaurantRoles = new ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
 
@@ -308,6 +314,37 @@ class Restaurant implements UserInterface
         if ($this->restaurantRoles->contains($restaurantRole)) {
             $this->restaurantRoles->removeElement($restaurantRole);
             $restaurantRole->removeRestaurateur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|News[]
+     */
+    public function getNews(): Collection
+    {
+        return $this->news;
+    }
+
+    public function addNews(News $news): self
+    {
+        if (!$this->news->contains($news)) {
+            $this->news[] = $news;
+            $news->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNews(News $news): self
+    {
+        if ($this->news->contains($news)) {
+            $this->news->removeElement($news);
+            // set the owning side to null (unless already changed)
+            if ($news->getRestaurant() === $this) {
+                $news->setRestaurant(null);
+            }
         }
 
         return $this;

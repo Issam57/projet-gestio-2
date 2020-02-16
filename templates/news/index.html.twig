@@ -7,7 +7,28 @@
 {% endblock %}
 
 {% block body %}
-    <div style="height:650px" class="container">
+    <div class="container">
         <h1 class="mt-5 border p-3 bg-secondary">News</h1>
+        <div class="row mt-5">
+            {% for new in news %}
+                <div class="col-md-4">
+                    <div class="card border-primary mb-3">
+                        <div class="card-header bg-secondary text-center">
+                            <img src="{{ new.coverImage }}" alt="Image de restaurant"
+                                 style="height:150px; width: 100%; display: block"></a>
+                            <div class="card-title shadow p-1 border">
+                                <h3 style="color: black"><strong>{{ new.titre }}</strong></h3> <br>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href=""></a></h4>
+                            <p class="card-text">{{ new.contenu }}</p>
+                            {#<a href="{{ path('restos_show', {'slug': rest.slug}) }}" style="display: block" class="btn btn-primary text-center">Voir le restaurant</a>#}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

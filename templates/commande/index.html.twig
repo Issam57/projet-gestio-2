@@ -26,7 +26,7 @@
             <tr>
                 <td>{{ plat.nom }}</td>
                 <td>{{ plat.description }}</td>
-                <td><img style="width: 50px; height: 50px" src="/image/pizza.jpg" alt="pizza"></td>
+                <td><img style="width: 50px; height: 50px" src="{{ plat.picture }}" alt="pizza"></td>
                 <td>{{ plat.prix }} €</td>
                 <td>
                     <a href="{{path('panier_add', {'id': plat.id})}}" class="btn btn-success float-right">

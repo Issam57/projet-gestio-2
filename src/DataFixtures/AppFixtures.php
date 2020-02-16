@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Image;
+use App\Entity\News;
 use App\Entity\Plat;
 use App\Entity\Restaurant;
 use App\Entity\Role;
@@ -28,6 +29,24 @@ class AppFixtures extends Fixture
         $adminRole->setTitle('ROLE_ADMIN');
         $manager->persist($adminRole);
 
+        //Ajouter des news
+
+        for ($i=1; $i <= 10; $i++) {
+
+            $news = new News();
+
+            $titre = $faker->sentence();
+            $coverImage = $faker->imageUrl(800,600,'food');
+            $contenu = $faker->paragraph(5);
+            $news->setTitre($titre)
+                    ->setContenu($contenu)
+                    ->setCoverImage($coverImage)
+                    ->setCreatedAt($faker->dateTime())
+                    ;
+            $manager->persist($news);
+        }
+
+       //Ajouter un restaurant
         $adminUser = new Restaurant();
         $adminUser->setNom('Fast Pizza')
                     ->setAdresse('2 rue de la paix')
@@ -71,7 +90,7 @@ class AppFixtures extends Fixture
             $plat->setNom('Pizza')
                 ->setDescription($faker->sentence(5))
                 ->setPrix(mt_rand(5, 10))
-                ->setPicture('https://lorempixel.com/400/200/food');
+                ->setPicture($faker->imageUrl(800, 600, 'food'));
 
             $manager->persist($plat);
         }

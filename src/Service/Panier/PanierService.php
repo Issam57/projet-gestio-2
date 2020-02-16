@@ -17,6 +17,10 @@ class PanierService {
         $this->platRepository = $platRepository;
     }
 
+    /**
+     * Permet d'ajouter un article dans le panier
+     *
+     */
     public function add(int $id) {
         $panier = $this->session->get('panier', []);
 
@@ -29,6 +33,9 @@ class PanierService {
         $this->session->set('panier', $panier);
     }
 
+    /**
+     * Permet de supprimer un article du panier
+     */
     public function remove(int $id) {
         $panier = $this->session->get('panier', []);
 
@@ -39,6 +46,9 @@ class PanierService {
         $this->session->set('panier', $panier);
     }
 
+    /**
+     * Permet de sélectionner l'ensemble du panier
+     */
     public function getFullCart() : array {
 
         $panier = $this->session->get('panier', []);
@@ -55,6 +65,9 @@ class PanierService {
         return $panierWithData;
     }
 
+    /**
+     * Fonction permettant de calculer le total de la commande
+     */
     public function getTotal() : float {
 
         $total = 0;
