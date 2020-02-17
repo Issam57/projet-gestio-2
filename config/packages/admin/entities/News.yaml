@@ -1,0 +1,15 @@
+easy_admin:
+  entities:
+    News:
+      class: App\Entity\News
+      form:
+        fields:
+          - {property: 'titre'}
+          - {property: 'contenu', type: 'text_editor'}
+          - {property: 'coverImage', label: 'URL Image'}
+      list:
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-info'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+          - {name: 'new', label: 'Ajouter'}
+          - {name: 'search', label: 'Rechercher'}

@@ -48,6 +48,11 @@ class News
      */
     private $coverImage;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
     /**
      * Permet d'initialiser le slug
      *
@@ -138,5 +143,10 @@ class News
         $this->coverImage = $coverImage;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->titre;
     }
 }

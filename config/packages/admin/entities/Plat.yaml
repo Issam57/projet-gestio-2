@@ -1,0 +1,16 @@
+easy_admin:
+  entities:
+    Plat:
+      class: App\Entity\Plat
+      form:
+        fields:
+          - {property: 'nom'}
+          - {property: 'description', type: 'text_editor'}
+          - {property: 'prix', type: 'money', type_options: {currency: 'EUR'}}
+          - {property: 'picture', label: 'URL Image'}
+      list:
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-info'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+          - {name: 'new', label: 'Ajouter'}
+          - {name: 'search', label: 'Rechercher'}

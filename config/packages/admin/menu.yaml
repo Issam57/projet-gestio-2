@@ -1,0 +1,9 @@
+easy_admin:
+  design:
+    menu:
+      - label: 'Restaurant'
+        icon: 'utensils -o'
+        children:
+          - {entity: 'News', icon: 'newspaper -o'}
+          - {entity: 'Plat', icon: 'book-open -o'}
+          - {entity: 'Livreur', icon: 'user'}

@@ -33,12 +33,12 @@ security:
             form_login:
                 login_path: admin_account_login
                 check_path: admin_account_login
-                default_target_path: admin_news
+                default_target_path: /admin
 
 
             logout:
                 path: admin_account_logout
-                target: home
+                target: admin_account_login
         main:
             anonymous: true
 

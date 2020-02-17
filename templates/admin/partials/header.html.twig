@@ -1,0 +1,16 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <img class="navbar ml-auto mr-auto" src="/image/Logo Gesti'O (blanc).png" alt="logo" />
+        </div>
+    </nav>
+    {% for label, messages in app.flashes %}
+        <div class="container text-center mt-3">
+            <div class="alert alert-{{ label }} border">
+                {% for message in messages %}
+                    <p><strong>{{ message }}</strong></p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</header>

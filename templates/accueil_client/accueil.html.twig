@@ -7,43 +7,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div style="height: 650px" class="container text-center">
         <h1 class="mt-5 border p-3 bg-secondary">Bienvenue sur la page d'accueil</h1>
-
-        <div class="row">
-
-            <div class="col-6">
-                {% for new in news %}
-                    <div class="col-4">
-                        <img style="width: 400px; height: 200px" src="{{ new.coverImage }}" alt="image">
-                        <div class="card-title">
-                            {{ new.titre }}
-                        </div>
-                        <div class="card-body">
-                            {{ new.contenu }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
-            <div class="col-6">
-                {% for resto in restos %}
-                <div class="col-4">
-                    <img style="width: 400px; height: 200px" src="{{ resto.coverImage }}" alt="image">
-                    <div class="card-title">
-                        {{ resto.nom }}<br>
-                        {{ resto.adresse }}<br>
-                        {{ resto.ville }}<br>
-                        {{ resto.codePostal }}
-                    </div>
-                    <div class="card-body">
-                        {{ resto.description }}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
+        <div class="row mt-5">
+            <h2><i class="fas fa-wrench"></i> Page en construction <i class="fas fa-wrench"></i></h2>
         </div>
+
     </div>
 
 {% endblock %}

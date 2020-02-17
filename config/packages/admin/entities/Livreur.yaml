@@ -1,0 +1,22 @@
+easy_admin:
+  entities:
+    Livreur:
+      class: App\Entity\Livreur
+      form:
+        fields:
+          - {property: 'nom'}
+          - {property: 'prenom'}
+          - {property: 'dateNaissance', type_options: {widget: 'single_text'}}
+          - {property: 'adresse'}
+          - {property: 'ville'}
+          - {property: 'codePostal'}
+          - {property: 'statut'}
+          - {property: 'email', type: 'email'}
+          - {property: 'telephone', type: 'tel'}
+
+      list:
+        actions:
+          - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-info'}
+          - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+          - {name: 'new', label: 'Ajouter'}
+          - {name: 'search', label: 'Rechercher'}
