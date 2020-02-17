@@ -52,6 +52,8 @@ class AccountClientController extends AbstractController
      * @return Response
      */
     public function register(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
+
+        //Permet d'ajouter un client
         $client = new Client();
 
         $form =  $this->createForm(RegistrationClientType::class, $client);
@@ -59,11 +61,14 @@ class AccountClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Pour encoder le mot de passe
             $hash = $encoder->encodePassword($client, $client->getHash());
             $client->setHash($hash);
 
             $manager->persist($client);
             $manager->flush();
+
+        //Message flash pour confirmer l'inscription
 
             $this->addFlash(
                 'success',
