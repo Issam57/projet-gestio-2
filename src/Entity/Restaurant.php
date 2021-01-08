@@ -87,11 +87,17 @@ class Restaurant implements UserInterface
      */
     private $news;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Plat", mappedBy="resto", orphanRemoval=true)
+     */
+    private $plats;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->restaurantRoles = new ArrayCollection();
         $this->news = new ArrayCollection();
+        $this->plats = new ArrayCollection();
     }
 
 
@@ -353,5 +359,36 @@ class Restaurant implements UserInterface
     public function __toString()
     {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection|Plat[]
+     */
+    public function getPlats(): Collection
+    {
+        return $this->plats;
+    }
+
+    public function addPlat(Plat $plat): self
+    {
+        if (!$this->plats->contains($plat)) {
+            $this->plats[] = $plat;
+            $plat->setResto($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlat(Plat $plat): self
+    {
+        if ($this->plats->contains($plat)) {
+            $this->plats->removeElement($plat);
+            // set the owning side to null (unless already changed)
+            if ($plat->getResto() === $this) {
+                $plat->setResto(null);
+            }
+        }
+
+        return $this;
     }
 }

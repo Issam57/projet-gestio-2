@@ -35,7 +35,6 @@ security:
                 check_path: admin_account_login
                 default_target_path: /admin
 
-
             logout:
                 path: admin_account_logout
                 target: admin_account_login
